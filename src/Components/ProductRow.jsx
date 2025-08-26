@@ -37,7 +37,7 @@ export default function ProductRow({
               );
             case "Image":
               return (
-                <td key={i} className="p-3 pl-5">
+                <td key={i} className="p-3 pl-8">
                   <img
                     src={product.Image}
                     alt={product.Name}
@@ -48,31 +48,31 @@ export default function ProductRow({
               );
             case "Name":
               return (
-                <td key={i} className="p-3 font-medium pl-5">
+                <td key={i} className="p-3 font-medium pl-8">
                   {product.Name}
                 </td>
               );
             case "Category":
               return (
-                <td key={i} className="p-3 pl-5">
+                <td key={i} className="p-3 pl-8">
                   {product.Category}
                 </td>
               );
             case "Price":
               return (
-                <td key={i} className="p-3 pl-5">
+                <td key={i} className="p-3 pl-8">
                   ${product.Price.toFixed(2)}
                 </td>
               );
             case "Stock":
               return (
-                <td key={i} className="p-3 pl-6">
+                <td key={i} className="p-3 pl-8">
                   {product.Stock}
                 </td>
               );
             case "Status":
               return (
-                <td key={i} className="p-3 pl-5">
+                <td key={i} className="p-3 pl-8">
                   <span
                     className={`px-2 py-1 text-xs rounded ${
                       product.Status === "In Stock"
@@ -88,7 +88,7 @@ export default function ProductRow({
               );
             case "Actions":
               return (
-                <td key={i} className="p-3 pl-5 relative" ref={dropdownRef}>
+                <td key={i} className="p-3 pl-8 relative" ref={dropdownRef}>
                   <button
                     onClick={() => setOpen(!open)}
                     className="px-3 py-1 text-sm rounded bg-gray-200 hover:bg-gray-300"
