@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CartItems from "./CartItems";
-import { Modal } from "./Modal";
+import Modal from "./Modal";
 
 const Header = ({
   cartItems,
@@ -11,7 +11,6 @@ const Header = ({
   setOpenCart,
   setCartItems,
 }) => {
- 
   const getTotalCartItems = () =>
     cartItems.reduce((acc, item) => acc + (item?.Quantity ?? 0), 0);
 
@@ -78,10 +77,9 @@ const Header = ({
                   type="text"
                   placeholder="Search"
                   value={search}
-                      onChange={(e) => {
-              setSearch(e.target.value);
-        
-            }}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
                   className="pl-10 pr-4 py-2 w-64 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
                 />
               </div>
@@ -156,9 +154,9 @@ const Header = ({
                 type="text"
                 placeholder="Search"
                 value={search}
-                     onChange={(e) => {
-              setSearch(e.target.value);
-            }}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                }}
                 className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
               />
             </div>

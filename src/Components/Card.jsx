@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { Modal } from "./Modal";
+import Modal from "./Modal";
 import ProductView from "./ProductView";
 
 const Card = ({ visibleData, loading, setOpen, setCartItems, setProducts }) => {

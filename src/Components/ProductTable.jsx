@@ -1,6 +1,6 @@
-import React, { useState,useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import ProductRow from "./ProductRow";
-import { Modal } from "./Modal";
+import Modal from "./Modal";
 import ProductView from "./ProductView";
 const LazyProductView = import("./ProductView");
 const LazyModal = import("./Modal");
