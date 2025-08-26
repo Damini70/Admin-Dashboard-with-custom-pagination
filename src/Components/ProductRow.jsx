@@ -66,7 +66,7 @@ export default function ProductRow({
               );
             case "Stock":
               return (
-                <td key={i} className="p-3 pl-5">
+                <td key={i} className="p-3 pl-6">
                   {product.Stock}
                 </td>
               );
