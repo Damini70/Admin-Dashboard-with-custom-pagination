@@ -1,10 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 
-export default function ProductRow({ product, heading,handleView,handleEdit,setCartModalOpen,setDeleteModalOpen}) {
+export default function ProductRow({
+  product,
+  heading,
+  handleView,
+  handleEdit,
+  setCartModalOpen,
+  setDeleteModalOpen,
+}) {
   const [open, setOpen] = useState(false); // dropdown
   const dropdownRef = useRef(null);
-
- 
 
   // 🔽 Close dropdown when clicking outside
   useEffect(() => {
@@ -19,8 +24,6 @@ export default function ProductRow({ product, heading,handleView,handleEdit,setC
     };
   }, []);
 
-
-
   return (
     <>
       <tr className="border-t hover:bg-gray-50">
@@ -28,13 +31,13 @@ export default function ProductRow({ product, heading,handleView,handleEdit,setC
           switch (col) {
             case "ID":
               return (
-                <td key={i} className="p-3">
+                <td key={i} className="p-3 pl-10">
                   {product.ID}
                 </td>
               );
             case "Image":
               return (
-                <td key={i} className="p-3">
+                <td key={i} className="p-3 pl-5">
                   <img
                     src={product.Image}
                     alt={product.Name}
@@ -45,31 +48,31 @@ export default function ProductRow({ product, heading,handleView,handleEdit,setC
               );
             case "Name":
               return (
-                <td key={i} className="p-3 font-medium">
+                <td key={i} className="p-3 font-medium pl-5">
                   {product.Name}
                 </td>
               );
             case "Category":
               return (
-                <td key={i} className="p-3">
+                <td key={i} className="p-3 pl-5">
                   {product.Category}
                 </td>
               );
             case "Price":
               return (
-                <td key={i} className="p-3">
+                <td key={i} className="p-3 pl-5">
                   ${product.Price.toFixed(2)}
                 </td>
               );
             case "Stock":
               return (
-                <td key={i} className="p-3">
+                <td key={i} className="p-3 pl-5">
                   {product.Stock}
                 </td>
               );
             case "Status":
               return (
-                <td key={i} className="p-3">
+                <td key={i} className="p-3 pl-5">
                   <span
                     className={`px-2 py-1 text-xs rounded ${
                       product.Status === "In Stock"
@@ -85,7 +88,7 @@ export default function ProductRow({ product, heading,handleView,handleEdit,setC
               );
             case "Actions":
               return (
-                <td key={i} className="p-3 relative" ref={dropdownRef}>
+                <td key={i} className="p-3 pl-5 relative" ref={dropdownRef}>
                   <button
                     onClick={() => setOpen(!open)}
                     className="px-3 py-1 text-sm rounded bg-gray-200 hover:bg-gray-300"
@@ -105,8 +108,7 @@ export default function ProductRow({ product, heading,handleView,handleEdit,setC
                             else if (action === "Edit") handleEdit(product);
                             else if (action === "Delete")
                               setDeleteModalOpen(product);
-                            else
-                             setCartModalOpen(product)
+                            else setCartModalOpen(product);
                           }}
                         >
                           {action}

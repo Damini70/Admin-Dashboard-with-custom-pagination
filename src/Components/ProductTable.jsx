@@ -106,7 +106,7 @@ const ProductTable = ({
             {heading.map((col, index) => (
               <th
                 key={col}
-                className={`p-3 pl-5 cursor-pointer transition-all duration-300 ease-in-out ${
+                className={`p-3 pl-10 cursor-pointer transition-all duration-300 ease-in-out ${
                   draggedCol === index ? "bg-gray-300" : ""
                 }`}
                 draggable
