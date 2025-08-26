@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-export default function ProductRow({
+function ProductRow({
   product,
   heading,
   handleView,
@@ -126,3 +126,5 @@ export default function ProductRow({
     </>
   );
 }
+
+export default React.memo(ProductRow);

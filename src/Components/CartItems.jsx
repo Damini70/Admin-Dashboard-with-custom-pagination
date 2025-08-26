@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CartItems({ cartItems, setCartItems }) {
+function CartItems({ cartItems, setCartItems }) {
   // Increase quantity of a product
   const handleIncrease = (id) => {
     setCartItems((prev) =>
@@ -144,3 +144,5 @@ export default function CartItems({ cartItems, setCartItems }) {
     </div>
   );
 }
+
+export default React.memo(CartItems);

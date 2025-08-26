@@ -39,4 +39,4 @@ const Stats = ({ products }) => {
   );
 };
 
-export default Stats;
+export default React.memo(Stats);

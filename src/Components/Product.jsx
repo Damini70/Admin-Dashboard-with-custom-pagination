@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import React, { Suspense, lazy } from "react";
 
 const LazyCard = lazy(() => import("./Card"));
 const LazyProductTable = lazy(() => import("./ProductTable"));
 
-export default function Product({ products, setCartItems, setProducts }) {
+function Product({ products, setCartItems, setProducts }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: "ID", direction: "asc" });
@@ -30,20 +30,26 @@ export default function Product({ products, setCartItems, setProducts }) {
     // 🔍 search filter
     if (search) {
       const lowerSearch = search.toLowerCase();
-      filtered = filtered.filter((p) => p.Name.toLowerCase().includes(lowerSearch));
+      filtered = filtered.filter((p) =>
+        p.Name.toLowerCase().includes(lowerSearch)
+      );
     }
 
     // 🔽 category filter
-    if (categoryFilter) filtered = filtered.filter((p) => p.Category === categoryFilter);
+    if (categoryFilter)
+      filtered = filtered.filter((p) => p.Category === categoryFilter);
 
     // 🔽 status filter
-    if (statusFilter) filtered = filtered.filter((p) => p.Status === statusFilter);
+    if (statusFilter)
+      filtered = filtered.filter((p) => p.Status === statusFilter);
 
     // ↕️ sort
     if (sortConfig.key) {
       filtered.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) return sortConfig.direction === "asc" ? -1 : 1;
-        if (a[sortConfig.key] > b[sortConfig.key]) return sortConfig.direction === "asc" ? 1 : -1;
+        if (a[sortConfig.key] < b[sortConfig.key])
+          return sortConfig.direction === "asc" ? -1 : 1;
+        if (a[sortConfig.key] > b[sortConfig.key])
+          return sortConfig.direction === "asc" ? 1 : -1;
         return 0;
       });
     }
@@ -65,24 +71,33 @@ export default function Product({ products, setCartItems, setProducts }) {
     }, 300);
 
     return () => clearTimeout(debounceTimeout.current);
-  }, [ products,
-  currentPage,
-  search,
-  categoryFilter,
-  statusFilter,
-  sortConfig,
-  itemsPerPage]);
+  }, [
+    products,
+    currentPage,
+    search,
+    categoryFilter,
+    statusFilter,
+    sortConfig,
+    itemsPerPage,
+  ]);
 
-  const handleSort = (key) => {
-    let direction = "asc";
-    if (sortConfig.key === key && sortConfig.direction === "asc") direction = "desc";
-    setSortConfig({ key, direction });
-  };
+  const handleSort = useCallback(
+    (key) => {
+      let direction = "asc";
+      if (sortConfig.key === key && sortConfig.direction === "asc") {
+        direction = "desc";
+      }
+      setSortConfig({ key, direction });
+    },
+    [sortConfig] // depends on sortConfig because you read from it
+  );
 
   const totalPages = Math.ceil(
     products.filter((p) => {
       const matchesSearch = p.Name.toLowerCase().includes(search.toLowerCase());
-      const matchesCategory = categoryFilter ? p.Category === categoryFilter : true;
+      const matchesCategory = categoryFilter
+        ? p.Category === categoryFilter
+        : true;
       const matchesStatus = statusFilter ? p.Status === statusFilter : true;
       return matchesSearch && matchesCategory && matchesStatus;
     }).length / itemsPerPage
@@ -136,7 +151,12 @@ export default function Product({ products, setCartItems, setProducts }) {
               viewBox="0 0 24 24"
               stroke="currentColor"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"
+              />
             </svg>
           </div>
           <input
@@ -197,3 +217,4 @@ export default function Product({ products, setCartItems, setProducts }) {
     </div>
   );
 }
+export default React.memo(Product);

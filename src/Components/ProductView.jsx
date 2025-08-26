@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function ProductView({
+function ProductView({
   product,
   isEditing = false,
   onSave,
@@ -216,3 +216,5 @@ export default function ProductView({
     </div>
   );
 }
+
+export default React.memo(ProductView);

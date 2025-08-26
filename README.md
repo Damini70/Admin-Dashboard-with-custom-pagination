@@ -14,6 +14,9 @@
 => Pagination: Built custom pagination logic to handle large datasets without performance issues.
 => Tailwind CSS: Utility-first approach ensures minimal CSS overhead and faster rendering.
 => Lazy Loading: Implemented lazy loading for components and product lists to improve initial load time and overall app performance.
+=> useCallback: use useCallback to recreate the function
+=> useMemo: use useMemo to memoise the value of a function
+=> use React.memo to control rerendering when props doesn't change
 
 ⏱ Time Tracking (per feature)
 ----------------------------------------

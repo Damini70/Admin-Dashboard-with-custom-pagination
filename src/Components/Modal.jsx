@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
-export function Modal({
+function Modal({
   open = false,
   onClose,
   title = "Modal Title",
@@ -120,4 +120,6 @@ export function Modal({
     </>
   );
 }
+
+export default React.memo(Modal);
 

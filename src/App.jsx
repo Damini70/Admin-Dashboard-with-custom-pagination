@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState,useCallback } from 'react'
 import './App.css'
 import Header from './Components/Header'
 import Stats from './Components/Stats'
@@ -10,9 +10,9 @@ function App() {
   const [openCart,setOpenCart]=useState(false)
   const [products, setProducts] = useState(initialProducts);
   const [search, setSearch] = useState("");
- function onCartClick(){
-   setOpenCart(true)
- }
+ const onCartClick = useCallback(() => {
+    setOpenCart(true);
+  }, []);
 
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useCallback } from "react";
 import ProductRow from "./ProductRow";
 import { Modal } from "./Modal";
 import ProductView from "./ProductView";
@@ -33,51 +33,48 @@ const ProductTable = ({
   const [isEditing, setIsEditing] = useState(false);
 
   // 🔹 Action Handlers
-  const handleView = (product) => {
+  const handleView = useCallback((product) => {
     setIsEditing(false);
     setSelectedProduct(product);
     setModalOpen(true);
-  };
+  }, []);
 
-  const handleEdit = (product) => {
+  const handleEdit = useCallback((product) => {
     setIsEditing(true);
     setSelectedProduct(product);
     setModalOpen(true);
-  };
+  }, []);
 
-  const handleDelete = (id) => {
+  const handleDelete = useCallback((id) => {
     console.log(id);
     setProducts((prev) => prev.filter((p) => p.ID !== id));
     setDeleteModalOpen(null);
-  };
+  }, []);
 
-  const handleSave = (updatedProduct) => {
+  const handleSave = useCallback((updatedProduct) => {
     setProducts((prev) =>
       prev.map((p) => (p.ID === updatedProduct.ID ? updatedProduct : p))
     );
     setSelectedProduct(updatedProduct);
     setIsEditing(false);
-  };
+  }, []);
 
-  function handleAddCart() {
+  const handleAddCart = useCallback(() => {
     setCartItems((prev) => {
-      // Check if item already exists in cart
       const itemExists = prev.find((item) => item.ID === cartModalOpen.ID);
 
       if (itemExists) {
-        // Increment quantity for the existing item
         return prev.map((item) =>
           item.ID === cartModalOpen.ID
             ? { ...item, Quantity: item.Quantity + 1 }
             : item
         );
       } else {
-        // Add new item with initial Quantity 1
         return [...prev, { ...cartModalOpen, Quantity: 1 }];
       }
     });
     setCartModalOpen(null);
-  }
+  }, [cartModalOpen]);
 
   const handleDragStart = (index) => {
     setDraggedCol(index);
@@ -238,4 +235,4 @@ const ProductTable = ({
   );
 };
 
-export default ProductTable;
+export default React.memo(ProductTable);
